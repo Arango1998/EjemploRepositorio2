@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="3">
+                <h:outputLabel value="Nombre"/>
+                <h:inputText id="txtNombre" value="#{personaBean.persona.nombre}" required="true" label="Nombre Requerido"/>
+                <h:messages for="txtNombre" style="color: red"/>
+                
+                 <h:outputLabel value="Edad"/>
+                 <h:inputText id="txtEdad" value="#{personaBean.persona.edad}" label="(1-18)">
+                 <f:validateLongRange for="txtEdad" minimum="1" maximum="18"></f:validateLongRange>
+                 </h:inputText>
+                 <h:messages for="txtEdad" style="color: red"/>
+                 
+                  <h:outputLabel value="Sexo"/>
+                  <h:inputText id="txtSexo" value="#{personaBean.persona.sexo}" validator="#{personaBean.validar}"/>
+                   <h:messages for="txtSexo"/>
+                
+            </h:panelGrid>
+            <h:commandButton actionListener="#{personaBean.registrar()}" value="Registrar"/>
+            <h:commandButton actionListener="#{personaBean.registrar()}" value="Registrar sin Validaciones" />
+            <h:dataTable value="#{personaBean.lstPersonas}" var="per" rendered="#{personaBean.lstPersonas.size() > 0 eq true}">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Nombre"/>
+                        
+                    </f:facet>
+                    <h:outputText value="#{per.nombre}"/> 
+                     
+                </h:column>
+                 <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Edad"/>
+                        
+                    </f:facet>
+                     <h:outputText value="#{per.edad}"/> 
+                     
+                </h:column>
+                 <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Sexo"/>
+                        
+                    </f:facet>
+                     <h:outputText value="#{per.sexo}"/> 
+                     
+                </h:column>
+                
+            </h:dataTable>
+        </h:form>
+    </h:body>
+</html>
+
